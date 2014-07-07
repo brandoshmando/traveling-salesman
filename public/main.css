@@ -12,6 +12,10 @@ body {
 h1 {
   color: red;
 }
+div {
+  float: left;
+}
+
 
 #wrapper {
   width: 100%;
@@ -21,5 +25,18 @@ h1 {
 #map-canvas {
   height: 70%;
   width: 70%;
-  float: right
+  position: relative;
+  float: right;
+  margin-right: 10px
+
+}
+
+.address-input {
+  margin: 20;
+  position: relative;
+  display: block
+}
+
+#submit-button {
+  margin: 0 auto;
 }
