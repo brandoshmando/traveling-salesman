@@ -1,0 +1,24 @@
+/* Map styling */
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  width: 100%;
+  padding: 0;
+}
+
+h1 {
+  color: red;
+}
+
+#map-canvas {
+  height: 70%;
+  width: 70%;
+  float: right
+}
+
+#forms {
+  float: left;
+}
