@@ -12,6 +12,10 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
 //Add destination input
 
-$( 'document' ).ready(funtcion{
-  $('')
+$( 'document' ).ready(function(){
+  $('#add-btn').click(function(){
+    var endPoint = $('#end-pt')
+    var clonedInput = endPoint.clone();
+    clonedInput.insertAfter(endPoint)
+  });
 });
