@@ -33,6 +33,7 @@ $( 'document' ).ready(function(){
     };
   });
 });
+
 //Some food for thought:
 /* In console, this works to recieve value of #start-pt input:
 var aValue = $('#start-pt').val();
