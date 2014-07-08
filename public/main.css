@@ -23,13 +23,11 @@ div {
   padding: 0;
 }
 #map-canvas {
-  height: 50%;
-  width: 50%;
+  height: 70%;
+  width: 70%;
   position: relative;
   float: right;
   margin-right: 10px;
-  border: 1px solid black;
-
 }
 
 .address-input {
