@@ -14,9 +14,12 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
 $( 'document' ).ready(function(){
   $('#add-btn').click(function(){
-    var endPoint = $('#end-pt')
-    var clonedInput = endPoint.clone();
-    clonedInput.insertAfter(endPoint)
+    var destInputs = $('.address-input').not("#submit-button, #del-btn, #add-btn");
+    if (destInputs.length < 10){
+      var endPoint = $('#end-pt')
+      var clonedInput = endPoint.clone();
+      clonedInput.insertAfter(endPoint)
+    };
   });
 });
 
