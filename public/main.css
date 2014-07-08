@@ -28,14 +28,21 @@ div {
   position: relative;
   float: right;
   margin-right: 10px;
+  padding-right: 20px
 }
 
 .address-input {
   margin: 20;
   position: relative;
-  display: block
+  display: block;
+  width: 100%;
 }
 
 #submit-button {
   margin: 0 auto;
+}
+
+#buttons-wrap{
+width: 100%;
+vertical-align: middle;
 }
