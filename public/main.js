@@ -19,3 +19,15 @@ $( 'document' ).ready(function(){
     clonedInput.insertAfter(endPoint)
   });
 });
+
+//Some food for thought:
+/* In console, this works to recieve value of #start-pt input:
+var aValue = $('#start-pt').val();
+
+However this does not:
+
+$('#submit-button').click(function(){
+var input = $('#start-pt')
+var bValue = input.val();
+return false;
+})
