@@ -1,14 +1,72 @@
-//Initialize gMap
-
+//Initialize gMap and route setter
+var directionsDisplay;
+var directionsService = new google.maps.DirectionsService();
 var map;
+
 function initialize() {
+  directionsDisplay = new google.maps.DirectionsRenderer();
   var mapOptions = {
     center: new google.maps.LatLng(43.7182712, -79.3777061),
     zoom: 10
   };
+  map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
 
-  var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
-}
+  // function calcRoute(){
+  //   var startAddress = $('#start-pt').val();
+  //   var finalDest = $('#start-pt').val();
+  //   var inputValues = $('.address-input').not('#start-pt')
+  //   destAddresses = []
+  //   for (var i=1; i<inputValues.length; i++){
+  //     destAddresses.push({
+  //       location: $(inputValues[i]).val(),
+  //       stopover: true
+  //     });
+  //   };
+  // };
+
+  $('#submit-button').click(function(ev){
+    ev.preventDefault();
+    var startAddress = $('#start-pt').val();
+    var finalDest = $('#start-pt').val();
+    var inputValues = $('.address-input').not('#start-pt')
+    var destAddresses = []
+    for (var i=1; i<inputValues.length; i++){
+      destAddresses.push({
+        location: $(inputValues[i]).val(),
+        stopover: true
+      });
+    };
+    console.log(destAddresses)
+    var request = {
+      origin: startAddress,
+      destination: finalDest,
+      waypoints: destAddresses,
+      optimizeWaypoints: true,
+      travelMode: google.maps.TravelMode.DRIVING
+    };
+    directionsService.route(request, function(response, status){
+      console.log(response);
+      console.log(status);
+      if (status === google.maps.DirectionsStatus.OK){
+        directionsDisplay.setDirections(response);
+      };
+    });
+  });
+
+  // var request = {
+  //   origin: startAddress,
+  //   destination: finalDest,
+  //   waypoints: destAddresses,
+  //   optimizeWaypoints: true,
+  //   travelMode: google.maps.TravelMode.DRIVING
+  // };
+
+  // directionsService.route(request, function(response, status){
+  //   if (status === google.maps.DirectionsStatus.OK){
+  //     directionsDisplay.setDirections(response);
+  //   };
+  // });
+};
 google.maps.event.addDomListener(window, 'load', initialize);
 
 //Add destination input
@@ -31,50 +89,20 @@ $( 'document' ).ready(function(){
     };
   });
 
-  //Grab destination info
-  $('#submit-button').click(function(ev){
-    ev.preventDefault();
-    var origin = $('#start-pt').val();
-    var inputObjects = $('.address-input').not('#start-pt');
-    var stringArray = [];
-    console.log(origin)
-    for (var i=0; i<inputObjects.length; i++){
-      stringArray.push($(inputObjects[i]).val());
-    }
-    console.log(stringArray.join('|'))
-    $.getJSON('http://maps.googleapis.com/maps/api/directions/json?origin=' + origin + '&destination=' + origin + '&waypoints=optimize:true|' + stringArray.join('|') + ',&key=AIzaSyDW98VEJP8zclfeCey8rkHe8k1EMqH2kjs').done(function(data){
-      console.log(data);
-    });
-  })
-
-   // for (var i; i < addressValues.length; i++){
-   //    geoWaypoints.push($.getJSON('https://maps.googleapis.com/maps/api/geocode/json?address=' + addressValues[i], function(data){
-   //      var latlng + "_" + i = data.results[i].geometry
-   //    });
-   //  };
-  //   if ( wayPoints.length === 0){
-  //     $.get("/http://maps.googleapis.com/maps/api/directions/json?origin=" + origin + "&destination=" + destination +  'destination')
-  //   }else{
-      //do waypoints
-    // }
-  //   $.get("/http://maps.googleapis.com/maps/api/directions/json?origin=" + origin + "&destination=" + origin +   )
-
-  //   for (i=0; i<addressInputs.length; i++){
-  //     addressValues.push(addressInputs[i].val());
-  //   };
-  // });
-  //Some food for thought:
-  /* In console, this works to recieve value of #start-pt input:
-  var aValue = $('#start-pt').val();
-
-  However this does not:*/
-
-  // $('#submit-button').click(function(){
-  // var input = $('#start-pt');
-  // var bValue = input.val();
-  // console.log(bValue);
-  // console.log("Function done...")
-  // return false;
+  //My first attempt at grabbing a response from google before I fully understood the API and how it worked(incomplete)...
+  // $('#submit-button').click(function(ev){
+  //   ev.preventDefault();
+  //   var origin = $('#start-pt').val();
+  //   var inputObjects = $('.address-input').not('#start-pt');
+  //   var stringArray = [];
+  //   console.log(origin)
+  //   for (var i=0; i<inputObjects.length; i++){
+  //     stringArray.push($(inputObjects[i]).val());
+  //   }
+  //   console.log(stringArray.join('|'))
+  //   $.getJSON('http://maps.googleapis.com/maps/api/directions/json?origin=' + origin + '&destination=' + origin + '&waypoints=optimize:true|' + stringArray.join('|') + ',&key=AIzaSyDW98VEJP8zclfeCey8rkHe8k1EMqH2kjs').done(function(data){
+  //     console.log(data);
+  //   });
   // })
 });
 
