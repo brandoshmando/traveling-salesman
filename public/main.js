@@ -1,5 +1,6 @@
 //Initialize gMap
 
+var map;
 function initialize() {
   var mapOptions = {
     center: new google.maps.LatLng(43.7182712, -79.3777061),
@@ -17,33 +18,54 @@ $( 'document' ).ready(function(){
     var destInputs = $('.address-input').not("#submit-button, #del-btn, #add-btn");
     if (destInputs.length < 10){
       var endPoint = $('#end-pt')
-      var clonedInput = endPoint.clone();
+      var clonedInput = endPoint.clone().removeAttr("id");
       clonedInput.insertAfter(endPoint)
     };
   });
-});
 
-
-//Delete destination input
-$( 'document' ).ready(function(){
+  //Delete destination input
   $('#del-btn').click(function(){
     var destInputs = $('.address-input').not("#submit-button, #del-btn, #add-btn");
     if (destInputs.length > 2){
       destInputs.last().remove();
     };
   });
+
+  //Grab destination info
+  $('submit-button').click(function(ev){
+    ev.preventDefault();
+
+    var addressValues = $('.address-input');
+
+    for (var i; i < addressValues.length; i++){
+      geoWaypoints.push($.getJSON('https://maps.googleapis.com/maps/api/geocode/json?address=' + addressValues[i], function(data){
+        var latlng + "_" + i = data.results[i].geometry
+      });
+    };
+  })
+  //   if ( wayPoints.length === 0){
+  //     $.get("/http://maps.googleapis.com/maps/api/directions/json?origin=" + origin + "&destination=" + destination +  'destination')
+  //   }else{
+      //do waypoints
+    // }
+  //   $.get("/http://maps.googleapis.com/maps/api/directions/json?origin=" + origin + "&destination=" + origin +   )
+
+  //   for (i=0; i<addressInputs.length; i++){
+  //     addressValues.push(addressInputs[i].val());
+  //   };
+  // });
+  //Some food for thought:
+  /* In console, this works to recieve value of #start-pt input:
+  var aValue = $('#start-pt').val();
+
+  However this does not:*/
+
+  // $('#submit-button').click(function(){
+  // var input = $('#start-pt');
+  // var bValue = input.val();
+  // console.log(bValue);
+  // console.log("Function done...")
+  // return false;
+  // })
 });
 
-//Some food for thought:
-/* In console, this works to recieve value of #start-pt input:
-var aValue = $('#start-pt').val();
-
-However this does not:*/
-
-// $('#submit-button').click(function(){
-// var input = $('#start-pt');
-// var bValue = input.val();
-// console.log(bValue);
-// console.log("Function done...")
-// return false;
-// })

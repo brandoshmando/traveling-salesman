@@ -18,9 +18,10 @@ div {
 
 
 #wrapper {
-  width: 100%;
+  width: 80%;
   height: 100%;
-  padding: 0;
+  margin: 30px 120px;
+  position: fixed;
 }
 #map-canvas {
   height: 70%;
