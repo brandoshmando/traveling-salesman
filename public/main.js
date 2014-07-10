@@ -32,17 +32,26 @@ $( 'document' ).ready(function(){
   });
 
   //Grab destination info
-  $('submit-button').click(function(ev){
+  $('#submit-button').click(function(ev){
     ev.preventDefault();
-
-    var addressValues = $('.address-input');
-
-    for (var i; i < addressValues.length; i++){
-      geoWaypoints.push($.getJSON('https://maps.googleapis.com/maps/api/geocode/json?address=' + addressValues[i], function(data){
-        var latlng + "_" + i = data.results[i].geometry
-      });
-    };
+    var origin = $('#start-pt').val();
+    var inputObjects = $('.address-input').not('#start-pt');
+    var stringArray = [];
+    console.log(origin)
+    for (var i=0; i<inputObjects.length; i++){
+      stringArray.push($(inputObjects[i]).val());
+    }
+    console.log(stringArray.join('|'))
+    $.getJSON('http://maps.googleapis.com/maps/api/directions/json?origin=' + origin + '&destination=' + origin + '&waypoints=optimize:true|' + stringArray.join('|') + ',&key=AIzaSyDW98VEJP8zclfeCey8rkHe8k1EMqH2kjs').done(function(data){
+      console.log(data);
+    });
   })
+
+   // for (var i; i < addressValues.length; i++){
+   //    geoWaypoints.push($.getJSON('https://maps.googleapis.com/maps/api/geocode/json?address=' + addressValues[i], function(data){
+   //      var latlng + "_" + i = data.results[i].geometry
+   //    });
+   //  };
   //   if ( wayPoints.length === 0){
   //     $.get("/http://maps.googleapis.com/maps/api/directions/json?origin=" + origin + "&destination=" + destination +  'destination')
   //   }else{
