@@ -25,7 +25,7 @@ function initialize() {
   // };
 
   $('#submit-button').click(function(ev){
-    // ev.preventDefault();
+    $('#submit-button').val('Calculating Route...').attr('disabled', 'disabled');
     var startAddress = $('#start-pt').val();
     var finalDest = $('#start-pt').val();
     var inputValues = $('.address-input').not('#start-pt')
@@ -49,6 +49,7 @@ function initialize() {
       if (status == google.maps.DirectionsStatus.OK){
         directionsDisplay.setDirections(response);
       };
+      $('#submit-button').val('Submit').removeAttr('disabled');
     });
   });
 
