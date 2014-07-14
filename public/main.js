@@ -25,12 +25,12 @@ function initialize() {
   // };
 
   $('#submit-button').click(function(ev){
-    ev.preventDefault();
+    // ev.preventDefault();
     var startAddress = $('#start-pt').val();
     var finalDest = $('#start-pt').val();
     var inputValues = $('.address-input').not('#start-pt')
     var destAddresses = []
-    for (var i=1; i<inputValues.length; i++){
+    for (var i=0; i<inputValues.length; i++){
       destAddresses.push({
         location: $(inputValues[i]).val(),
         stopover: true
