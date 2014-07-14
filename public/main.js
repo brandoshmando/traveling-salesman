@@ -10,7 +10,7 @@ function initialize() {
     zoom: 10
   };
   map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
-
+  directionsDisplay.setMap(map);
   // function calcRoute(){
   //   var startAddress = $('#start-pt').val();
   //   var finalDest = $('#start-pt').val();
@@ -36,7 +36,6 @@ function initialize() {
         stopover: true
       });
     };
-    console.log(destAddresses)
     var request = {
       origin: startAddress,
       destination: finalDest,
@@ -47,7 +46,7 @@ function initialize() {
     directionsService.route(request, function(response, status){
       console.log(response);
       console.log(status);
-      if (status === google.maps.DirectionsStatus.OK){
+      if (status == google.maps.DirectionsStatus.OK){
         directionsDisplay.setDirections(response);
       };
     });
