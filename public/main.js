@@ -74,10 +74,9 @@ google.maps.event.addDomListener(window, 'load', initialize);
 $( 'document' ).ready(function(){
   $('#add-btn').click(function(){
     var destInputs = $('.address-input').not("#submit-button, #del-btn, #add-btn");
+    var clonedInput = $('#end-pt').clone().removeAttr("id");
     if (destInputs.length < 10){
-      var endPoint = $('#end-pt')
-      var clonedInput = endPoint.clone().removeAttr("id");
-      clonedInput.insertAfter(endPoint)
+      $('#input-container').append(clonedInput);
     };
   });
 

@@ -38,12 +38,19 @@ div {
   display: block;
   width: 100%;
 }
-
+#forms {
+  width: 130px;
+  position: relative;
+  height: 156px;
+}
 #submit-button {
   margin: 0 auto;
+  position: relative;
+
 }
 
 #buttons-wrap{
 width: 100%;
 vertical-align: middle;
 }
+
