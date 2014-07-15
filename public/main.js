@@ -11,19 +11,7 @@ function initialize() {
   };
   map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
   directionsDisplay.setMap(map);
-  // function calcRoute(){
-  //   var startAddress = $('#start-pt').val();
-  //   var finalDest = $('#start-pt').val();
-  //   var inputValues = $('.address-input').not('#start-pt')
-  //   destAddresses = []
-  //   for (var i=1; i<inputValues.length; i++){
-  //     destAddresses.push({
-  //       location: $(inputValues[i]).val(),
-  //       stopover: true
-  //     });
-  //   };
-  // };
-
+//On click submit, send info to Gmaps API and set route with response
   $('#submit-button').click(function(ev){
     $('#submit-button').val('Calculating Route...').attr('disabled', 'disabled');
     var startAddress = $('#start-pt').val();
@@ -49,23 +37,18 @@ function initialize() {
       if (status == google.maps.DirectionsStatus.OK){
         directionsDisplay.setDirections(response);
       };
+      //Disable Submit button while route is calc'd
       $('#submit-button').val('Submit').removeAttr('disabled');
+      //Add link to start again
+      $('<a href="">//Again</a>')
+        .css({color:'red'})
+        .appendTo('#forms');
+      $("input[type='a']").click(function(ev){
+        ev.preventDefault;
+        $(window).reload();
+      })
     });
   });
-
-  // var request = {
-  //   origin: startAddress,
-  //   destination: finalDest,
-  //   waypoints: destAddresses,
-  //   optimizeWaypoints: true,
-  //   travelMode: google.maps.TravelMode.DRIVING
-  // };
-
-  // directionsService.route(request, function(response, status){
-  //   if (status === google.maps.DirectionsStatus.OK){
-  //     directionsDisplay.setDirections(response);
-  //   };
-  // });
 };
 google.maps.event.addDomListener(window, 'load', initialize);
 
@@ -74,7 +57,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 $( 'document' ).ready(function(){
   $('#add-btn').click(function(){
     var destInputs = $('.address-input').not("#submit-button, #del-btn, #add-btn");
-    var clonedInput = $('#end-pt').clone().removeAttr("id");
+    var clonedInput = $('#end-pt').clone().removeAttr("id").val('');
     if (destInputs.length < 10){
       $('#input-container').append(clonedInput);
     };
@@ -87,6 +70,14 @@ $( 'document' ).ready(function(){
       destInputs.last().remove();
     };
   });
+});
+
+
+
+
+
+
+
 
   //My first attempt at grabbing a response from google before I fully understood the API and how it worked(incomplete)...
   // $('#submit-button').click(function(ev){
@@ -103,5 +94,30 @@ $( 'document' ).ready(function(){
   //     console.log(data);
   //   });
   // })
-});
 
+  // var request = {
+  //   origin: startAddress,
+  //   destination: finalDest,
+  //   waypoints: destAddresses,
+  //   optimizeWaypoints: true,
+  //   travelMode: google.maps.TravelMode.DRIVING
+  // };
+
+  // directionsService.route(request, function(response, status){
+  //   if (status === google.maps.DirectionsStatus.OK){
+  //     directionsDisplay.setDirections(response);
+  //   };
+  // });
+
+// function calcRoute(){
+  //   var startAddress = $('#start-pt').val();
+  //   var finalDest = $('#start-pt').val();
+  //   var inputValues = $('.address-input').not('#start-pt')
+  //   destAddresses = []
+  //   for (var i=1; i<inputValues.length; i++){
+  //     destAddresses.push({
+  //       location: $(inputValues[i]).val(),
+  //       stopover: true
+  //     });
+  //   };
+  // };
